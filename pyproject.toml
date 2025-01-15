@@ -1,0 +1,125 @@
+[project]
+name = "web_crawler"
+authors = [
+  { name = "web_crawler", email = "king.arthur@camelot.bt" }
+]
+description = ""
+readme = "README.md"
+dynamic = ["version"]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pandas>=2.2.3",
+    "requests>=2.32.3",
+    "openpyxl>=3.1.5"
+]
+
+[project.urls]
+Documentation = "https://jcmullwh.github.io/web_crawler/"
+Source = "https://github.com/jcmullwh/web_crawler"
+
+
+[tool.mypy]
+files = ["web_crawler"]
+disallow_untyped_defs = "True"
+disallow_any_unimported = "True"
+no_implicit_optional = "True"
+check_untyped_defs = "True"
+warn_return_any = "True"
+warn_unused_ignores = "True"
+show_error_codes = "True"
+
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+[tool.ruff.lint]
+extend-select = ["I"]
+select = [
+    "A",
+    "ARG",
+    "B",
+    "C",
+    "DTZ",
+    "E",
+    "EM",
+    "F",
+    "FBT",
+    "ICN",
+    "ISC",
+    "N",
+    "PLC",
+    "PLE",
+    "PLR",
+    "PLW",
+    "Q",
+    "RUF",
+    "S",
+    "T",
+    "TID",
+    "UP",
+    "W",
+    "YTT",
+]
+ignore = [
+    # Allow non-abstract empty methods in abstract base classes
+    "B027",
+    # Allow boolean positional values in function calls, like `dict.get(... True)`
+    "FBT003",
+    # Ignore checks for possible passwords
+    "S105",
+    "S106",
+    "S107",
+    # Ignore complexity
+    "C901",
+    "PLR0911",
+    "PLR0912",
+    "PLR0913",
+    "PLR0915",
+]
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101","PLR2004"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=web_crawler/ --cov-report=term-missing"
+asyncio_mode = "strict"
+
+
+[tool.pdm.dev-dependencies]
+test = [
+  "pytest>=8.2.0",
+  "pytest-cov>=5.0.0",
+  "pytest-asyncio",
+  ]
+dev = [
+"deptry>=0.16.1",
+"mypy>=1.10.0",
+  "ruff>=0.4.3",
+  "pre-commit>=3.7.0",
+  "tox>=4.15.0"
+]
+docs = [
+  "mkdocs>=1.6.0",
+  "mkdocs-material>=9.5.21",
+  "mkdocstrings[python]>=0.25.1"
+]
+
+
+[tool.pdm.scripts]
+test = "pytest"
+test-cov-xml = "pytest --cov-report=xml"
+lint = "scripts/lint.py"
+lint-check = "scripts/lint-check.py"
+docs-serve = "mkdocs serve"
+docs-build = "mkdocs build"
+
+[tool.pdm.build]
+# excludes = ["./**/.git"]
+# package-dir = "."
+includes = ["web_crawler"]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
