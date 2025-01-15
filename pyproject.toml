@@ -5,7 +5,7 @@ authors = [
 ]
 description = ""
 readme = "README.md"
-dynamic = ["version"]
+version = "0.0.0"
 classifiers = [
     "Programming Language :: Python :: 3 :: Only",
 ]
@@ -93,13 +93,6 @@ test = [
   "pytest-cov>=5.0.0",
   "pytest-asyncio",
   ]
-dev = [
-"deptry>=0.16.1",
-"mypy>=1.10.0",
-  "ruff>=0.4.3",
-  "pre-commit>=3.7.0",
-  "tox>=4.15.0"
-]
 docs = [
   "mkdocs>=1.6.0",
   "mkdocs-material>=9.5.21",
@@ -114,6 +107,9 @@ lint = "scripts/lint.py"
 lint-check = "scripts/lint-check.py"
 docs-serve = "mkdocs serve"
 docs-build = "mkdocs build"
+bump-patch = "bump2version patch"
+bump-minor = "bump2version minor"
+bump-major = "bump2version major"
 
 [tool.pdm.build]
 # excludes = ["./**/.git"]
@@ -123,3 +119,23 @@ includes = ["web_crawler"]
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
+
+[dependency-groups]
+dev = [
+    "deptry>=0.16.1",
+    "mypy>=1.10.0",
+    "ruff>=0.4.3",
+    "pre-commit>=3.7.0",
+    "tox>=4.15.0",
+    "bump2version>=1.0.1",
+]
+test = [
+  "pytest>=8.2.0",
+  "pytest-cov>=5.0.0",
+  "pytest-asyncio",
+  ]
+docs = [
+  "mkdocs>=1.6.0",
+  "mkdocs-material>=9.5.21",
+  "mkdocstrings[python]>=0.25.1"
+]
